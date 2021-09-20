@@ -1,12 +1,5 @@
 <template>
-    <main>
-        <router-view></router-view>
-    </main>
-
-
-
-
-    <!-- <div class="container">
+    <div class="container">
         <h4>pagina: {{ currentPage }} su : {{ lastPage }}</h4>
         <div class="row">
             <div class="col-sm-6" v-for=" post in posts" :key="post.id">
@@ -15,8 +8,8 @@
                         <h5 class="card-title">{{post.title}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted"> {{ cut(post.description, 80) }} </h6>
                         <p class="card-text">{{ prepareDate(post.created_at) }}</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        
+                        <router-link class="btn btn-info" :to="{name: 'details', params: { slug: post.slug } }">dettagli</router-link>
                     </div>
                 </div>
             </div>
@@ -41,14 +34,12 @@
                 </li>
             </ul>
         </nav>
-    </div> -->
+    </div>
 </template>
 
 <script>
-
-
 export default {
-    name:'Main',
+    name:'Post',
     data(){
         return{
             // qui si trova il controller delle api
@@ -56,13 +47,15 @@ export default {
             posts:[],
             currentPage: 1,
             lastPage: null
+        
         }
     },
     created(){
         
         this.getPosts(1);
+        // console.log(this.posts);
     },
-    methods: {
+    methods:{
         getPosts(page){
             axios.get(this.apiCall, {
                     params:{
@@ -96,7 +89,7 @@ export default {
             return day + '/' + month + '/' +Cdate.getFullYear();
         }
     }
-        
+
 }
 </script>
 

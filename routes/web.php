@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
 
 
 Auth::routes();
@@ -28,5 +28,5 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
 });
 
 
-
+Route::get('/{any?}', 'HomeController@index')->where('any', '.*');
 
